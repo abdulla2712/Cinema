@@ -1,0 +1,74 @@
+{% extends "cinema/layout.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<!-- ======= Welcome Section ======= -->
+<section class="welcome">
+  <div class="container d-flex flex-column align-items-center">
+    <h1>Welcome to the Cinema</h1>
+  </div>
+</section><!-- End Welcome Section -->
+
+<!-- ======= Theater Section ======= -->
+<section class="theater">
+  <div class="container">
+    {% if theaters %}
+    {% for theater in theaters %}
+      <h3>{{ theater.name }} {% if theater.is_active == False %} - Inactive {% endif %}</h3>
+      <p>{{ theater.location }}</p>
+      {% if theater.movies %}
+        <div class="row">
+          {% for movie in theater.movies %}
+            <div class="col-6 col-md-3 mb-4">
+              <a href="/movies/{{movie.id}}" class="text-white">
+                {% if movie.image %}
+                  <img class="card-img-top" src="{{ movie.image }}" alt="{{ movie.name }}">
+                {% else %}
+                  <img class="card-img-top opacity-75" src="{% static 'img/movie-placeholder.png' %}" alt="{{ movie.name }}">
+                {% endif %}
+                <h6 class="p-2 text-center">{{ movie.name }}</h6>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+    {% else %}
+      <p>No theaters are available.</p>
+    {% endif %}
+  </div>
+</section><!-- End Theater Section -->
+
+<!-- ======= About Us Section ======= -->
+<section class="about">
+  <div class="container">
+
+    <div class="row content">
+      <div class="col-lg-6">
+        <h2>Eum ipsam laborum deleniti velitena</h2>
+        <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assum perenda sruen jonee trave</h3>
+      </div>
+      <div class="col-lg-6 pt-4 pt-lg-0">
+        <p>
+          Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum
+        </p>
+        <ul>
+          <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequa</li>
+          <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+          <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</li>
+        </ul>
+        <p class="fst-italic">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section><!-- End About Us Section -->
+
+{% endblock %}
